@@ -21,8 +21,8 @@ public class DistributedSnackbarClient {
      * @param args the command line arguments
      * @throws java.io.IOException
      */
-    
-    private static String mensagem = null;
+ 
+    private static String choice = null;
     
     public static void main(String[] args) throws IOException {
         Socket socketCliente = null;
@@ -41,10 +41,10 @@ public class DistributedSnackbarClient {
         output.writeUTF(password);
         log(password);
         
-        while(mensagem != "exit") {
-            mensagem = input.readUTF();
+        while(choice != "exit") {
+            String mensagem = input.readUTF();
             receivedLog(mensagem);        
-            String choice = JOptionPane.showInputDialog(mensagem);        
+            choice = JOptionPane.showInputDialog(mensagem);        
             output.writeUTF(choice);
         }      
         String response = input.readUTF();
