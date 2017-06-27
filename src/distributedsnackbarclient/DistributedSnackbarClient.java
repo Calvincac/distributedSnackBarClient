@@ -5,11 +5,10 @@
  */
 package distributedsnackbarclient;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import javax.swing.JOptionPane;
+import java.util.Scanner;
+
 
 /**
  *
@@ -20,44 +19,21 @@ public class DistributedSnackbarClient {
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
-     */
- 
-    private static String choice = null;
+     */    
     
     public static void main(String[] args) throws IOException {
         Socket socketCliente = null;
-
+        int numberOfClients;
+        Scanner scan = new Scanner(System.in);
         socketCliente = new Socket("localhost", 6800);
-        System.out.println("Connected to Server!");
-        DataInputStream input = new DataInputStream(socketCliente.getInputStream());
-        DataOutputStream output = new DataOutputStream(socketCliente.getOutputStream());
         
-    
-        String registration = JOptionPane.showInputDialog("Registration: ");
-        output.writeUTF(registration);
-        log(registration);
+        System.out.println("How many client would you like to have started ?");
+        numberOfClients = scan.nextInt();
+
+        for (int i=0; i<numberOfClients; i++) {
+            new ClientThread(socketCliente).start();
+        }
         
-        String password = JOptionPane.showInputDialog("Password: ");
-        output.writeUTF(password);
-        log(password);
-        
-        while(choice != "exit") {
-            String mensagem = input.readUTF();
-            receivedLog(mensagem);        
-            choice = JOptionPane.showInputDialog(mensagem);        
-            output.writeUTF(choice);
-        }      
-        String response = input.readUTF();
-        String f = JOptionPane.showInputDialog(response);      
-        
-    }
-    
-    public static void log(String message) {
-        System.out.println("Message: " + message);
-    }
-    
-    public static void receivedLog(String message){
-        System.out.println("Received message: " +  message);
     }
     
 }
