@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,6 +22,7 @@ public class ClientThread extends Thread {
     
     private final Socket socketCliente;
     private String choice = null;
+    private Scanner scan = new Scanner(System.in);
 
     public ClientThread(Socket socketCliente) {
         this.socketCliente = socketCliente;    
@@ -34,19 +36,22 @@ public class ClientThread extends Thread {
             DataInputStream input = new DataInputStream(socketCliente.getInputStream());
             DataOutputStream output = new DataOutputStream(socketCliente.getOutputStream());
 
-
-            String registration = JOptionPane.showInputDialog("Registration: ");
+            System.out.println("Registration: ");
+            String registration = scan.nextLine();
+            
             output.writeUTF(registration);
             log(registration);
-
-            String password = JOptionPane.showInputDialog("Password: ");
+            
+            System.out.println("Registration: ");
+            String password = scan.nextLine();
             output.writeUTF(password);
             log(password);
 
             while(choice != "exit") {
                 String mensagem = input.readUTF();
-                receivedLog(mensagem);        
-                choice = JOptionPane.showInputDialog(mensagem);        
+                receivedLog(mensagem);
+                System.out.println(mensagem);
+                choice = scan.nextLine();
                 output.writeUTF(choice);
             }      
             String response = input.readUTF();
