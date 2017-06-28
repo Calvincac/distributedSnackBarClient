@@ -37,13 +37,13 @@ public class ClientThread extends Thread {
             DataOutputStream output = new DataOutputStream(socketCliente.getOutputStream());
 
             System.out.println("Registration: ");
-            String registration = scan.nextLine();
+            String registration = scan.next();
             
             output.writeUTF(registration);
             log(registration);
             
-            System.out.println("Registration: ");
-            String password = scan.nextLine();
+            System.out.println("Password: ");
+            String password = scan.next();
             output.writeUTF(password);
             log(password);
 
@@ -51,11 +51,11 @@ public class ClientThread extends Thread {
                 String mensagem = input.readUTF();
                 receivedLog(mensagem);
                 System.out.println(mensagem);
-                choice = scan.nextLine();
+                choice = scan.next();
                 output.writeUTF(choice);
             }      
             String response = input.readUTF();
-            String f = JOptionPane.showInputDialog(response);      
+            System.out.println(response);
             
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
