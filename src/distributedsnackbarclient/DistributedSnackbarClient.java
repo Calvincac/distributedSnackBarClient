@@ -21,18 +21,12 @@ public class DistributedSnackbarClient {
      * @throws java.io.IOException
      */    
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Socket socketCliente = null;
-        int numberOfClients;
-        Scanner scan = new Scanner(System.in);
         socketCliente = new Socket("localhost", 6800);
         
-        System.out.println("How many client would you like to have started ?");
-        numberOfClients = scan.nextInt();
-
-        for (int i=0; i<numberOfClients; i++) {
-            new ClientThread(socketCliente).start();
-        }
+        new ClientThread(socketCliente).start();
+        
         
     }
     

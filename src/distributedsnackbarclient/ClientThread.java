@@ -40,37 +40,27 @@ public class ClientThread extends Thread {
             String registration = scan.next();
             
             output.writeUTF(registration);
-            log(registration);
             
             System.out.println("Password: ");
             String password = scan.next();
+            
             output.writeUTF(password);
-            log(password);
 
             while(choice != "exit") {
                 String mensagem = input.readUTF();
-                receivedLog(mensagem);
                 System.out.println(mensagem);
                 choice = scan.next();
                 output.writeUTF(choice);
+                System.out.println("tá caindo aqui");
             }      
             String response = input.readUTF();
             System.out.println(response);
-            
+            System.exit(1);
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
-    }
-    
-        
-    public void log(String message) {
-        System.out.println("Message: " + message);
-    }
-    
-    public void receivedLog(String message){
-        System.out.println("Received message: " +  message);
     }
     
 }
