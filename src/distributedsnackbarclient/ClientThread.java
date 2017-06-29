@@ -53,9 +53,10 @@ public class ClientThread extends Thread {
                 System.out.println(mensagem);
                 choice = scan.next();
                 output.writeUTF(choice);
-            }      
-            String response = input.readUTF();
-            System.out.println(response);
+                String response = input.readUTF();
+                System.out.println(response);
+            }     
+
             System.exit(1);
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
