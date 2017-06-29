@@ -7,7 +7,6 @@ package distributedsnackbarclient;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Scanner;
 
 
 /**
@@ -21,13 +20,10 @@ public class DistributedSnackbarClient {
      * @throws java.io.IOException
      */    
     
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException {
         Socket socketCliente = null;
         socketCliente = new Socket("localhost", 6800);
         
-        new ClientThread(socketCliente).start();
-        
-        
-    }
-    
+        new ClientThread(socketCliente).start();     
+    }    
 }

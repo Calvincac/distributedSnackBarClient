@@ -12,7 +12,6 @@ import java.net.Socket;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,22 +44,28 @@ public class ClientThread extends Thread {
             String password = scan.next();
             
             output.writeUTF(password);
+            
+            String authentication = input.readUTF();
+            authenticateUser(authentication);
 
             while(choice != "exit") {
                 String mensagem = input.readUTF();
                 System.out.println(mensagem);
                 choice = scan.next();
                 output.writeUTF(choice);
-                System.out.println("tá caindo aqui");
             }      
             String response = input.readUTF();
             System.out.println(response);
             System.exit(1);
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        
+        }        
     }
-    
+
+    public static void authenticateUser(String authentication) {                    
+        if(! authentication.equalsIgnoreCase("User authenticated!")) {
+             System.out.println(authentication);
+             System.exit(1);
+        }
+    }
 }
