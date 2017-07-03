@@ -48,16 +48,32 @@ public class ClientThread extends Thread {
             String authentication = input.readUTF();
             authenticateUser(authentication);
 
-            while(choice != "exit") {
-                String mensagem = input.readUTF();
-                System.out.println(mensagem);
-                choice = scan.next();
-                output.writeUTF(choice);
-                String response = input.readUTF();
-                System.out.println(response);
-            }     
+            while(true) {
+                String firstMenu = input.readUTF();
+                System.out.println(firstMenu);
+                String menuChoice = scan.next();
+                output.writeUTF(menuChoice);
+                
+                if(menuChoice.equalsIgnoreCase("1")) {
+                    System.out.println(input.readUTF());
+                    
+                } else if(menuChoice.equalsIgnoreCase("2")) {                    
+                    String mensagem = input.readUTF();
+                    System.out.println(mensagem);
+                    choice = scan.next();                
+                    if (choice.equalsIgnoreCase("exit")) {
+                        System.exit(0);
+                    }
+                    output.writeUTF(choice);
+                    String response = input.readUTF();
+                    System.out.println(response);                    
+                    
+                } else if(menuChoice.equalsIgnoreCase("2")) {
+                    System.exit(0);
+                }              
 
-            System.exit(1);
+            }     
+            
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }        
