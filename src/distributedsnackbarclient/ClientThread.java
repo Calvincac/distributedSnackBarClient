@@ -70,8 +70,7 @@ public class ClientThread extends Thread {
                     
                 } else if(menuChoice.equalsIgnoreCase("2")) {
                     System.exit(0);
-                }              
-
+                }
             }     
             
         } catch (IOException ex) {
