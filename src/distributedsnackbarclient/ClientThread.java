@@ -68,7 +68,9 @@ public class ClientThread extends Thread {
                     String response = input.readUTF();
                     System.out.println(response);                    
                     
-                } else if(menuChoice.equalsIgnoreCase("2")) {
+                } else if(menuChoice.equalsIgnoreCase("3")) {
+                    
+                } else if(menuChoice.equalsIgnoreCase("4")) {
                     System.exit(0);
                 }
             }     
